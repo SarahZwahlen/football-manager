@@ -2,10 +2,11 @@ import NewTeamForm from "./NewTeamForm"
 import TeamList from "./TeamList"
 
 const Teams = () => {
-    return (<div>
+    return (
+    <div>
         <TeamList></TeamList>
         <NewTeamForm></NewTeamForm>
-        </div>)
+    </div>)
 }
 
 export default Teams

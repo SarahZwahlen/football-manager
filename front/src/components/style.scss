@@ -1,0 +1,31 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+body {
+    margin: 0;
+}
+
+header{
+    border-bottom : 1px solid black;
+    padding : 1rem;
+    text-align: center;
+    
+    h1{
+        font-size: 2rem;
+    }
+}
+
+.error {
+    color : red;
+    font-style : italic;
+}
+
+.newPlayerForm{
+    max-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    gap : 1rem;
+
+
+}
