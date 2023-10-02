@@ -1,16 +1,14 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Teams from "./components/Teams";
 import { FootballDataProvider } from "./context/football_app_context.js";
-import Players from "./components/Players";
 import "./components/style.scss";
+import Main from "./components/Main";
 
 function App() {
   return (
     <FootballDataProvider>
       <Header></Header>
-      <Teams></Teams>
-      <Players></Players>
+      <Main></Main>
       <Footer></Footer>
     </FootballDataProvider>
   );

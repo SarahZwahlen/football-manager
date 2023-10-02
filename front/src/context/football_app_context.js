@@ -18,9 +18,6 @@ export function FootballDataProvider({ children }) {
     },
   ]);
 
-
-
-
   return (
     <Context.Provider value={{ footballData, setFootballData }}>
       {children}

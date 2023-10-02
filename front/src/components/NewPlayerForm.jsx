@@ -2,7 +2,7 @@ import { Context } from "../context/football_app_context"
 
 import { useContext, useState } from "react"
 
-const NewPlayerForm = () => {
+const NewPlayerForm = (props) => {
     const {footballData, setFootballData} = useContext(Context)
     const [player, setPlayer] = useState({name : null, age : null, isStarterPlayer : null, playerPosition : null})
     const [teamName, setTeamName] = useState(null)
@@ -34,12 +34,13 @@ const NewPlayerForm = () => {
         const allUpdatedTeams = footballData.filter(team => team.name !== teamName)
         allUpdatedTeams.push(teamToUpdate)
         setFootballData(allUpdatedTeams)
+        props.showTeams()
     }
 
     return (
         <section>
             <h2>Créer un nouveau joueur</h2>
-            <form className="newPlayerForm">
+            <form className="form">
                 <label>
                     Nom du joueur
                 </label>
@@ -61,9 +62,9 @@ const NewPlayerForm = () => {
                 <label>Poste</label>
                 <select onChange={(e) => setPlayer({...player, 
                     playerPosition : e.target.value})}>
-                    <option value="attacker">Attaquant</option>
-                    <option value="defender">Défenseur</option>
-                    <option value="goal">Gardien</option>
+                    <option value="Attaquant">Attaquant</option>
+                    <option value="Défenseur">Défenseur</option>
+                    <option value="Gardien">Gardien</option>
                 </select>
                 <label>Le joueur est titulaire</label>
                 <select onChange={(e) => setPlayer({...player, 
@@ -71,7 +72,7 @@ const NewPlayerForm = () => {
                     <option value="true" default>Oui</option>
                     <option value="false">Non</option>
                 </select>
-                <button onClick={createPlayer}>Créer le joueur</button>
+                <button  className="main-button" onClick={createPlayer}>Créer le joueur</button>
                 {errorMessage && <p className="error">{errorMessage}</p>}
             </form>
         </section>
