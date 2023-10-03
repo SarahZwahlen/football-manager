@@ -22,6 +22,14 @@ const NewTeamForm = (props) => {
                 ...footballData,
                 newTeam
             ])
+
+
+            const localStorageTeams = localStorage.getItem("footballTeams") ? JSON.parse(localStorage.getItem("footballTeams")) : []
+            localStorage.setItem("footballTeams", JSON.stringify([
+                ...localStorageTeams,
+                newTeam
+            ]))
+            
             props.showTeams()
         }
     }

@@ -5,11 +5,10 @@ import { Context } from '../context/football_app_context'
 export function Player({playerData, teamIndex, playerIndex}) {
     const {footballData, setFootballData} = useContext(Context)
     const [isEditingPlayer, setEditingPlayer] = useState(false)
-    
+
     const deletePlayer = () => {
         const teamPlayers = footballData[teamIndex].players
         teamPlayers.splice(playerIndex,1)
-        console.log(teamPlayers)
         const updatedTeam = {
             ...footballData[teamIndex],
             players: teamPlayers

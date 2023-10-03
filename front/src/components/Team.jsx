@@ -6,10 +6,17 @@ import { useContext, useState } from "react"
 export function Team({teamData, index}) {
     const { footballData, setFootballData } = useContext(Context)
     const [isEditing, setIsEditing] = useState(false)
+
     const deleteTeam = (index) => {
+        const localTeamData = JSON.parse(localStorage.getItem("footballTeams"))
+        const newLocalTeamData = localTeamData.filter(team => team.name !== teamData.name)
+        localStorage.setItem("footballTeams", JSON.stringify(newLocalTeamData))
+
         const updatedData = footballData.filter((item, itemIndex) => itemIndex !== index)
         setFootballData(updatedData)
+
     }
+
     return (
         <div className="team-data">
             <div>
@@ -23,11 +30,7 @@ export function Team({teamData, index}) {
                         <i className="fa-regular fa-pen-to-square"></i>
                     </button>
                 </div>
-                {isEditing && 
-                    <TeamEdit index={index} >
-                        <h3>Modifier l'équipe</h3>
-                    </TeamEdit>
-                }
+                {isEditing && <TeamEdit index={index} />}
             </div>
             <div>
                 <h4>Liste des joueurs : </h4>
