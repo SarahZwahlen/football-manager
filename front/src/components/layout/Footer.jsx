@@ -6,7 +6,7 @@ const Footer = () => {
     return (<footer>
         <p>Une app par </p>
         <div className="artists-credits">
-            <a><img href="https://github.com/Pparg" className="footer-pic" src={shrek} /></a>
+            <a href="https://github.com/Pparg"><img  className="footer-pic" src={shrek} /></a>
             <ul>
                 <li><a href="https://github.com/Pparg"><img className="git-hub-logo" src={logo}/> Pierre-Paul WEISS</a></li>
                 <li><a href="https://github.com/SarahZwahlen"><img className="git-hub-logo" src={logo}/> Sarah ZWAHLEN</a></li>
