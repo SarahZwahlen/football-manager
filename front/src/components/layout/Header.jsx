@@ -1,7 +1,7 @@
 const Header = () => {
     return (
         <header>
-            <h1>Football Manager</h1>
+            <h1><i class="fa-regular fa-futbol"></i> Football Manager</h1>
         </header>
     )
 }

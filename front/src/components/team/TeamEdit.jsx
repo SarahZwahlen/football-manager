@@ -1,4 +1,4 @@
-import { Context } from "../context/football_app_context"
+import { Context } from "../../context/football_app_context"
 import { useContext, useState } from "react"
 
 export function TeamEdit ({children, index}) {

@@ -1,6 +1,6 @@
 import { PlayerEdit } from './PlayerEdit'
 import { useState, useContext } from 'react'
-import { Context } from '../context/football_app_context'
+import { Context } from '../../context/football_app_context'
 
 export function Player({playerData, teamIndex, playerIndex}) {
     const {footballData, setFootballData} = useContext(Context)

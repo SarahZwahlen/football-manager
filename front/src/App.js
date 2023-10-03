@@ -1,16 +1,18 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 import { FootballDataProvider } from "./context/football_app_context.js";
-import "./components/style.scss";
-import Main from "./components/Main";
+import "./assets/style.scss";
+import Main from "./components/layout/Main";
 
 function App() {
   return (
-    <FootballDataProvider>
-      <Header></Header>
-      <Main></Main>
-      <Footer></Footer>
-    </FootballDataProvider>
+    <div className="app_container">
+      <FootballDataProvider>
+        <Header></Header>
+        <Main></Main>
+        <Footer></Footer>
+      </FootballDataProvider>
+    </div>
   );
 }
 

@@ -1,5 +1,7 @@
 :root{
     --main-color : rgb(96, 156, 96);
+    --green-200:rgb(186, 216, 186);
+    --green-500:rgb(72, 109, 72);
     --green-700 :  rgb(38, 59, 38);
     --accent-color : rgb(209, 160, 55);
 }
@@ -7,8 +9,14 @@
 
 *{
     font-family: Arial, Helvetica, sans-serif;
+    color-scheme: dark;
 }
-
+.app_container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 body {
     margin: 0;
 }
@@ -42,6 +50,7 @@ main{
     margin : 0 auto;
     max-width: 900px;
 }
+
 footer {
     margin-top: 1rem;
     ul {
@@ -51,6 +60,19 @@ footer {
         flex-direction: column;
         align-items: center;
         list-style: none;
+    }
+
+    a{
+        color : white;
+        text-decoration: none;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+
+    .git-hub-logo{
+        width: 1rem;
     }
 }
 
@@ -220,4 +242,54 @@ button{
             display: flex;
         }
     }
+}
+
+.match-list{
+    display: flex;
+    gap:1rem;
+    width: 100%;
+    flex-direction: column;
+  border-collapse: collapse;
+        tr {
+            &:nth-child(2n){
+                background-color: var(--green-200);
+            }
+
+            td{
+                padding: 0 1rem;
+            }
+        }
+
+    .hosting{
+        color : var(--green-500)
+    }
+
+    .competition-round{
+        display: flex;
+        justify-content: center;
+    }
+
+    .match-title {
+        color : var(--green-700);
+        font-size: 1.2rem;
+        text-transform: uppercase;
+    }
+}
+
+.match {
+    border-radius: 5px;
+    padding: 1rem;
+
+}
+
+.artists-credits{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:3rem;
+}
+
+.footer-pic{
+    border-radius: 20px;
+    width: 7rem;
 }

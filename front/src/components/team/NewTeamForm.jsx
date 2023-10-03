@@ -1,5 +1,5 @@
 import { useState, useContext } from "react"
-import { Context } from "../context/football_app_context"
+import { Context } from "../../context/football_app_context"
 
 const NewTeamForm = (props) => {
     const {footballData, setFootballData} = useContext(Context)

@@ -1,6 +1,6 @@
-import { Context } from "../context/football_app_context"
+import { Context } from "../../context/football_app_context"
 import { TeamEdit } from "./TeamEdit"
-import { Player } from "./Player"
+import { Player } from "../player/Player"
 import { useContext, useState } from "react"
 
 export function Team({teamData, index}) {

@@ -4,18 +4,18 @@ export const Context = createContext();
 
 export function FootballDataProvider({ children }) {
   const [footballData, setFootballData] = useState([
-    {
-      name: "The team",
-      jerseyColor: "red",
-      players: [
-        {
-          name: "joueur 1",
-          age: 18,
-          playerPosition: "attaquant",
-          isStarterPlayer: false,
-        },
-      ],
-    },
+    // {
+    //   name: "The team",
+    //   jerseyColor: "red",
+    //   players: [
+    //     {
+    //       name: "joueur 1",
+    //       age: 18,
+    //       playerPosition: "attaquant",
+    //       isStarterPlayer: false,
+    //     },
+    //   ],
+    // },
   ]);
 
   return (
