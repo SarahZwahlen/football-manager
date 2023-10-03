@@ -1,10 +1,15 @@
 import { Context } from "../context/football_app_context"
 import { Team } from './Team.jsx'
 
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 
 const TeamList = () => {
-    const { footballData } = useContext(Context)
+    const { footballData, setFootballData } = useContext(Context)
+
+    useEffect(() => {
+        const localTeamData = JSON.parse(localStorage.getItem("footballTeams"))
+        if (localTeamData) setFootballData(localTeamData)
+    },[])
     
     return (
         <section>
