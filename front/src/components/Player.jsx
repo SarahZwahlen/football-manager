@@ -14,6 +14,9 @@ export function Player({playerData, teamIndex, playerIndex}) {
             players: teamPlayers
         }
         const updatedData = footballData.splice(teamIndex, 1, updatedTeam)
+
+        localStorage.setItem("footballTeams", JSON.stringify(updatedData))
+
         setFootballData(updatedData)
     }
     

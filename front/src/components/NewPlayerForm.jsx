@@ -4,7 +4,7 @@ import { useContext, useState } from "react"
 
 const NewPlayerForm = (props) => {
     const {footballData, setFootballData} = useContext(Context)
-    const [player, setPlayer] = useState({name : null, age : null, isStarterPlayer : null, playerPosition : null})
+    const [player, setPlayer] = useState({name : null, age : 1, isStarterPlayer : true, playerPosition : "Attaquant"})
     const [teamName, setTeamName] = useState(null)
     const [errorMessage, setErrorMessage] = useState(null)
 
@@ -17,6 +17,10 @@ const NewPlayerForm = (props) => {
             return 
         }
         const teamToUpdate = footballData.find(team => team.name === teamName)
+        if(!teamName){
+            setErrorMessage("Aucune équipe n'a été choisie")
+            return
+        }
         const nonStarterPlayerCount = teamToUpdate.players.reduce((acc, value) => value.isStarterPlayer === false ? acc = acc +1 : acc, 0)
 
         if(nonStarterPlayerCount >= 2 && !player.isStarterPlayer){
@@ -30,6 +34,11 @@ const NewPlayerForm = (props) => {
         }
 
         teamToUpdate.players.push(player)
+
+        const localTeamsData = JSON.parse(localStorage.getItem("footballTeams"))
+        const newLocalData = localTeamsData.filter(team => team.name !== teamName)
+        newLocalData.push(teamToUpdate)
+        localStorage.setItem("footballTeams", JSON.stringify(newLocalData))
 
         const allUpdatedTeams = footballData.filter(team => team.name !== teamName)
         allUpdatedTeams.push(teamToUpdate)
@@ -48,26 +57,26 @@ const NewPlayerForm = (props) => {
                     ...player, 
                     name : e.target.value})} required/>
                 <label>Age</label>
-                <input type="number" value={player.age} required onChange={(e) =>setPlayer(
+                <input type="number" value={player.age} min="1" required onChange={(e) =>setPlayer(
                     {...player, 
                     age : e.target.value > 40 ? null : parseFloat(e.target.value) }
                     )
 }/>
-                {player.age > 40 && <p>Le joueur est trop agé, il ne peut avoir plus de 40 ans.</p>}
+                {!player.age && <p className="error">Le joueur est trop agé, il ne peut avoir plus de 40 ans.</p>}
                 <label>Équipe</label>
                 <select onChange={(e) => setTeamName(e.target.value)}>
                     <option>-- Sélectionner une équipe</option>
                     {footballData.map(team => {return <option value={team.name}>{team.name}</option>})}
                 </select>
                 <label>Poste</label>
-                <select onChange={(e) => setPlayer({...player, 
+                <select value={player.playerPosition} onChange={(e) => setPlayer({...player, 
                     playerPosition : e.target.value})}>
                     <option value="Attaquant">Attaquant</option>
                     <option value="Défenseur">Défenseur</option>
                     <option value="Gardien">Gardien</option>
                 </select>
                 <label>Le joueur est titulaire</label>
-                <select onChange={(e) => setPlayer({...player, 
+                <select value={player.isStarterPlayer} onChange={(e) => setPlayer({...player, 
                     isStarterPlayer : e.target.value === "true" ? true : false})}>
                     <option value="true" default>Oui</option>
                     <option value="false">Non</option>
