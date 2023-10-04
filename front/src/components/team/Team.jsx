@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom"
 import { Context } from "../../context/football_app_context"
 import { TeamEdit } from "./TeamEdit"
-import { Player } from "../player/Player"
 import { useContext, useState } from "react"
 
 export function Team({teamData, index}) {
@@ -19,10 +19,10 @@ export function Team({teamData, index}) {
 
     return (
         <div className="team-data">
-            <div>
+            {/* <div> */}
                 <div className="team-header">
                     <div className="team-jerseyColor" style={{backgroundColor : teamData.jerseyColor}}></div>
-                    <h3>{teamData?.name}</h3>
+                    <Link to={`/team-notice/${teamData.name}`}><h3>{teamData?.name}</h3></Link>
                     <button className="icon-button" onClick={() => deleteTeam(index)}>
                         <i className="fa-solid fa-trash"></i>
                     </button>
@@ -31,13 +31,6 @@ export function Team({teamData, index}) {
                     </button>
                 </div>
                 {isEditing && <TeamEdit index={index} />}
-            </div>
-            <div>
-                <h4>Liste des joueurs : </h4>
-                <ul>
-                    {teamData.players.map((player, playerindex) => <Player playerData={player} teamIndex={index} playerIndex={playerindex}/>)}
-                </ul>
-            </div>
         </div>
     )
 }

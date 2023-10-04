@@ -25,7 +25,7 @@ const privateRoutes = createBrowserRouter([
       { path: "new-user", element: <CreateUser /> },
       { path: "*", element: <NotFound /> },
       { path: "player-notice/:player_id", element: <PlayerNotice /> },
-      { path: "team-notice/:team-id", element: <TeamNotice /> },
+      { path: "team-notice/:team_name", element: <TeamNotice /> },
     ],
   },
 ]);
