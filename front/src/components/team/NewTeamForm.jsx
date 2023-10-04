@@ -1,7 +1,8 @@
 import { useState, useContext } from "react"
 import { Context } from "../../context/football_app_context"
+import { useNavigate } from "react-router-dom"
 
-const NewTeamForm = (props) => {
+const NewTeamForm = () => {
     const {footballData, setFootballData} = useContext(Context)
     const [newTeam, setNewTeam] = useState({
         name: null,
@@ -9,6 +10,8 @@ const NewTeamForm = (props) => {
         players: []
     })
     const [errors, setErrors] = useState(null)
+
+    const navigate = useNavigate()
 
     const createTeam = (e) => {
         e.preventDefault()
@@ -29,8 +32,7 @@ const NewTeamForm = (props) => {
                 ...localStorageTeams,
                 newTeam
             ]))
-            
-            props.showTeams()
+            navigate("/team-list")
         }
     }
 

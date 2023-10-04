@@ -1,6 +1,8 @@
 import { PlayerEdit } from './PlayerEdit'
 import { useState, useContext } from 'react'
 import { Context } from '../../context/football_app_context'
+import { Link } from 'react-router-dom'
+
 
 export function Player({playerData, teamIndex, playerIndex}) {
     const {footballData, setFootballData} = useContext(Context)
@@ -23,7 +25,7 @@ export function Player({playerData, teamIndex, playerIndex}) {
     return(
         <div>
             <div className='player-header'>
-                <p>{playerData?.name} - {playerData.age} ans - {playerData.playerPosition} - {playerData.isStarterPlayer ? "titulaire" : "remplaçant"} </p>
+                <Link to={`/player-notice/${playerData.id}`}> {playerData?.name}</Link>
                 <button className="icon-button" onClick={deletePlayer}>
                     <i className="fa-solid fa-trash"></i>
                 </button>

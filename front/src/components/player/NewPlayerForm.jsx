@@ -1,12 +1,15 @@
-import { Context } from "../../context/football_app_context"
+import { Context } from "../../context/football_app_context";
 
-import { useContext, useState } from "react"
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuid } from 'uuid';
 
 const NewPlayerForm = (props) => {
     const {footballData, setFootballData} = useContext(Context)
-    const [player, setPlayer] = useState({name : null, age : 1, isStarterPlayer : true, playerPosition : "Attaquant"})
+    const [player, setPlayer] = useState({name : null, age : 1, isStarterPlayer : true, playerPosition : "Attaquant", id : uuid()})
     const [teamName, setTeamName] = useState(null)
     const [errorMessage, setErrorMessage] = useState(null)
+    const navigate = useNavigate()
 
 
     const createPlayer = (e) => {
@@ -43,7 +46,7 @@ const NewPlayerForm = (props) => {
         const allUpdatedTeams = footballData.filter(team => team.name !== teamName)
         allUpdatedTeams.push(teamToUpdate)
         setFootballData(allUpdatedTeams)
-        props.showTeams()
+        navigate("/team-list")
     }
 
     return (

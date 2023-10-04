@@ -12,10 +12,10 @@ const TeamList = () => {
     },[])
     
     return (
-        <section>
+        <main>
             {footballData.length >0 && <h2>Liste des équipes</h2>}
             {footballData.map((team, index) => <Team teamData={team} index={index} key={index}/>) }   
-        </section>
+        </main>
     )
 }
 

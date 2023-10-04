@@ -8,6 +8,8 @@ import { Ligue1Result } from "../components/ligue1/Ligue1Result";
 import { Login } from "../components/user/Login";
 import CreateUser from "../components/user/CreateUser";
 import NotFound from "../components/layout/NotFound";
+import PlayerNotice from "../components/player/PlayerNotice";
+import TeamNotice from "../components/team/TeamNotice";
 
 const privateRoutes = createBrowserRouter([
   {
@@ -22,6 +24,8 @@ const privateRoutes = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "new-user", element: <CreateUser /> },
       { path: "*", element: <NotFound /> },
+      { path: "player-notice/:player_id", element: <PlayerNotice /> },
+      { path: "team-notice/:team-id", element: <TeamNotice /> },
     ],
   },
 ]);
