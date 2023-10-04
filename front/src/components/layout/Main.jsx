@@ -45,12 +45,6 @@ const Main = () => {
 
     return (
         <main>
-            <nav className="main-action-buttons">
-                {currentUser.isLogged && <button className="main-button" onClick={showTeams}>Voir les équipes</button>}
-                {currentUser.isLogged && <button className="main-button" onClick={showCreateNewTeam}>Créer une équipe</button>}
-                {currentUser.isLogged && <button className="main-button" onClick={showCreatePlayer}>Créer un joueur</button>}
-                <button className="main-button" onClick={showLigueResult}>Prochain match Ligue1</button>
-            </nav>
             {(isTeamsVisible && currentUser.isLogged) && <TeamList/>}
             {(isCreateTeamFormVisible && currentUser.isLogged) && <NewTeamForm showTeams={showTeams}/>}
             {(isCreatePlayerFormVisible && currentUser.isLogged) && <NewPlayerForm showTeams={showTeams}/>}

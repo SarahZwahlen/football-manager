@@ -140,11 +140,15 @@ button{
     font-style : italic;
 }
 
-.main-action-buttons{
+.main-link-buttons{
     display : flex; 
     flex-direction: row;
     gap : 1rem;
     justify-content: center;
+}
+
+.main-link{
+    text-decoration: none;
 }
 
 .form{
