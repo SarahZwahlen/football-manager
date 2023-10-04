@@ -21,8 +21,8 @@ const TeamNotice = () => {
     return (
         <main>
             <div className="team-header">
-            <div className="team-jerseyColor" style={{backgroundColor : teamData.jerseyColor}}></div>
-            <h2>{teamData?.name}</h2>
+                <div className="team-jerseyColor" style={{backgroundColor : teamData.jerseyColor}}></div>
+                <h2>{teamData?.name}</h2>
             </div>
             <div>
                 <h3>Liste des joueurs : </h3>

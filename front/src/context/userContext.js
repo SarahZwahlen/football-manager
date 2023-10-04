@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const UserContext = createContext();
 
@@ -16,6 +16,15 @@ const UserContextComponent = ({ children }) => {
 
   const [currentUser, setCurrentUser] = useState(userInitialState);
 
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if (currentUser) {
+      setCurrentUser(currentUser);
+      setUsers(JSON.stringify(localStorage.getItem("users")));
+    }
+  }, []);
+
   const createUser = (userData) => {
     const userExists = users.find((user) => user.email === userData.email);
 
@@ -25,6 +34,8 @@ const UserContextComponent = ({ children }) => {
         error: "Cet email est déjà utilisé par un autre utilisateur.",
       };
     }
+
+    localStorage.setItem("users", JSON.stringify([...users, userData]));
 
     setUsers([...users, userData]);
     setCurrentUser({ ...userData, isLogged: true });
@@ -43,6 +54,10 @@ const UserContextComponent = ({ children }) => {
 
     if (userData.password === user.password) {
       setCurrentUser({ ...user, isLogged: true });
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify({ ...user, isLogged: true })
+      );
       return true;
     }
 
@@ -50,6 +65,7 @@ const UserContextComponent = ({ children }) => {
   };
 
   const logout = () => {
+    localStorage.setItem("currentUser", { isLogged: false });
     setCurrentUser(userInitialState);
   };
 
