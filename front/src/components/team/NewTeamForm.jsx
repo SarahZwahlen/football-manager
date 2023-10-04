@@ -35,7 +35,7 @@ const NewTeamForm = (props) => {
     }
 
     return (
-        <section>  
+        <main>  
             <h2>Créer une nouvelle équipe</h2>
             <form className="form">
                 <label>Nom de l'équipe</label>
@@ -51,7 +51,7 @@ const NewTeamForm = (props) => {
                 <button className="main-button" onClick={createTeam}>Créer l'équipe</button>
             </form>
             {errors && <div>{errors}</div>}
-        </section>
+        </main>
     
     )
 }

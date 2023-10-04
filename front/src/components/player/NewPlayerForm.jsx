@@ -47,7 +47,7 @@ const NewPlayerForm = (props) => {
     }
 
     return (
-        <section>
+        <main>
             <h2>Créer un nouveau joueur</h2>
             <form className="form">
                 <label>
@@ -84,7 +84,7 @@ const NewPlayerForm = (props) => {
                 <button  className="main-button" onClick={createPlayer}>Créer le joueur</button>
                 {errorMessage && <p className="error">{errorMessage}</p>}
             </form>
-        </section>
+        </main>
     )
 }
 

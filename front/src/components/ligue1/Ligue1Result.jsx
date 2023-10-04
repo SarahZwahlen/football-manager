@@ -13,7 +13,7 @@ export function Ligue1Result () {
         setData()
     }, [])
     return(
-        <section>
+        <main>
             <h2>Ligue 1</h2>
             <h3>Prochains Matchs</h3>
             <table className="match-list">
@@ -29,6 +29,6 @@ export function Ligue1Result () {
                 )}
                 </tbody>
             </table>
-        </section>
+        </main>
     )
 }

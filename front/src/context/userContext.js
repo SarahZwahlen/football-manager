@@ -13,7 +13,7 @@ const UserContextComponent = ({ children }) => {
     email: null,
     password: null,
   };
-  
+
   const [currentUser, setCurrentUser] = useState(userInitialState);
 
   const createUser = (userData) => {
@@ -27,8 +27,9 @@ const UserContextComponent = ({ children }) => {
     }
 
     setUsers([...users, userData]);
+    setCurrentUser({ ...userData, isLogged: true });
 
-    return { isCreated: true, error: null };
+    return { isCreated: true, error: null, user: userData };
   };
 
   const logUser = (userData) => {

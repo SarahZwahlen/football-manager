@@ -5,8 +5,11 @@ import NewTeamForm from "../components/team/NewTeamForm";
 import { Player } from "../components/player/Player";
 import NewPlayerForm from "../components/player/NewPlayerForm";
 import { Ligue1Result } from "../components/ligue1/Ligue1Result";
+import { Login } from "../components/user/Login";
+import CreateUser from "../components/user/CreateUser";
+import NotFound from "../components/layout/NotFound";
 
-const router = createBrowserRouter([
+const privateRoutes = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
@@ -16,25 +19,11 @@ const router = createBrowserRouter([
       { path: "team-create", element: <NewTeamForm /> },
       { path: "player-create", element: <NewPlayerForm /> },
       { path: "ligue_result", element: <Ligue1Result /> },
+      { path: "login", element: <Login /> },
+      { path: "new-user", element: <CreateUser /> },
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);
 
-export default router;
-// team/:team_id/player/:pkayer_id
-
-// const team =  [{
-// id : String,
-// name : String,
-// jerseyColor : String,
-// players : Player[]
-// }]
-
-// const player = [{
-//     id : String,
-//     name : String,
-//     age : Number,
-//     Position : String,
-//     isStaterPlayer : Boolean ,
-//     teamId : string
-// }]
+export default privateRoutes;

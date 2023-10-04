@@ -1,11 +1,14 @@
 import { UserContext } from "../../context/userContext"
 import { useContext, useState } from "react"
-
+import { useNavigate } from "react-router-dom"
 
 const CreateUser = () => {
-    const {createUser} = useContext(UserContext)
+    const {createUser, logUser, currentUser} = useContext(UserContext)
     const [userData, setUserData] = useState({email : null, username : null, password : null})
     const [errorMessage, setErrorMessage] = useState(null)
+    
+    const navigate = useNavigate()
+    
     const handleButton = (e) => {
         e.preventDefault()
 
@@ -28,23 +31,27 @@ const CreateUser = () => {
 
         if(!result.isCreated){
             setErrorMessage(result.error)
-        }   
+        }  
+
+        navigate("/")
+
     }
 
+
     return(
-        <>
+        <main>
             <h2>Créer un utilisateur</h2>
             <form className="form">
                 <label>Nom d'utilisateur</label>
-                <input type="text" required placeholder="JohnDoe" OnChange={(e) => setUserData({...userData, username : e.target.value})}/>
+                <input type="text" required placeholder="JohnDoe" onChange={(e) => setUserData({...userData, username : e.target.value})}/>
                 <label>Email</label>
-                <input type="email" required placeholder="john@doe.com"  OnChange={(e) => setUserData({...userData, email : e.target.value})}/>
+                <input type="email" required placeholder="john@doe.com"  onChange={(e) => setUserData({...userData, email : e.target.value})}/>
                 <label>Mot de passe</label>
-                <input type="password" required onCanPlay={(e) => setUserData({...userData, password : e.target.value})} />
+                <input type="password" required onChange={(e) => setUserData({...userData, password : e.target.value})} />
                 <button className="main-button" onClick={handleButton} >Créer l'utilisateur</button>
                 {errorMessage && <p className="error">{errorMessage}</p>}
             </form>
-        </>
+        </main>
     )
 }
 

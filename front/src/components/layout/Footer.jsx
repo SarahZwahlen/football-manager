@@ -4,7 +4,6 @@ import donkey from "./../../assets/DaDonkey.webp"
 
 const Footer = () => {
     return (<footer>
-        <p>Une app par </p>
         <div className="artists-credits">
             <a href="https://github.com/Pparg"><img  className="footer-pic" src={shrek} /></a>
             <ul>

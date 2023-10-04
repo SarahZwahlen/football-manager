@@ -1,20 +1,28 @@
 import { FootballDataProvider } from "./context/football_app_context.js";
-import { UserContextComponent } from "./context/userContext.js";
-import "./assets/style.scss";
-import Layout from "./components/layout/Layout.jsx";
+import { UserContext } from "./context/userContext.js";
+
 import { RouterProvider } from "react-router-dom";
-import router from "./router/routes.js";
+import privateRoutes from "./router/privateRoutes.js";
+import publicRoutes from "./router/publicRoutes.js";
+
+import { useContext } from "react";
+
+import Layout from "./components/layout/Layout.jsx";
+
+import "./assets/style.scss";
 
 function App() {
+  const { currentUser } = useContext(UserContext);
+
   return (
     <div className="app_container">
-      <UserContextComponent>
-        <FootballDataProvider>
-          <RouterProvider router={router}>
-            <Layout />
-          </RouterProvider>
-        </FootballDataProvider>
-      </UserContextComponent>
+      <FootballDataProvider>
+        <RouterProvider
+          router={currentUser.isLogged ? privateRoutes : publicRoutes}
+        >
+          <Layout />
+        </RouterProvider>
+      </FootballDataProvider>
     </div>
   );
 }
