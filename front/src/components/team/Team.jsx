@@ -19,7 +19,6 @@ export function Team({teamData, index}) {
 
     return (
         <div className="team-data">
-            {/* <div> */}
                 <div className="team-header">
                     <div className="team-jerseyColor" style={{backgroundColor : teamData.jerseyColor}}></div>
                     <Link to={`/team-notice/${teamData.name}`}><h3>{teamData?.name}</h3></Link>
