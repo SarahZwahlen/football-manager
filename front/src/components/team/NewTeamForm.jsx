@@ -2,10 +2,17 @@ import { useState, useContext } from "react"
 import { Context } from "../../context/football_app_context"
 import { useNavigate } from "react-router-dom"
 
+import { useSelector, useDispatch } from "react-redux"
+import { ADD_TEAM, DELETE_TEAM } from "../../store/reducers/football_data_reducer"
+
+
 const NewTeamForm = () => {
+    //const football = useSelector((state) => state.footballData)
+    const dispatch = useDispatch()
+
     const {footballData, setFootballData} = useContext(Context)
     const [newTeam, setNewTeam] = useState({
-        name: null,
+        name: '',
         jerseyColor: '#000000',
         players: []
     })
@@ -13,25 +20,19 @@ const NewTeamForm = () => {
 
     const navigate = useNavigate()
 
-    const createTeam = (e) => {
+    const handleNewTeam = (e) => {
         e.preventDefault()
-        let newteamName = newTeam.name.toLowerCase()
-        let isAlreadyTeam = footballData.find(team => team.name.toLowerCase() === newteamName)
-        if (isAlreadyTeam){
-            setErrors("This team is already present")
-        }else {
-            setErrors(null)
-            setFootballData([
-                ...footballData,
-                newTeam
-            ])
-
-
+        const isAlreadyTeam = footballData.find(team => team.name.toLowerCase() === newTeam.name.toLocaleLowerCase())
+        if (isAlreadyTeam) {
+            setErrors("Le nom de l'équipe est déjà pris.")
+        }
+        else {
             const localStorageTeams = localStorage.getItem("footballTeams") ? JSON.parse(localStorage.getItem("footballTeams")) : []
             localStorage.setItem("footballTeams", JSON.stringify([
                 ...localStorageTeams,
-                newTeam
-            ]))
+                 newTeam
+             ]))
+            dispatch(ADD_TEAM(newTeam))
             navigate("/team-list")
         }
     }
@@ -50,7 +51,7 @@ const NewTeamForm = () => {
                     ...newTeam,
                     jerseyColor: e.target.value
                 })}/>
-                <button className="main-button" onClick={createTeam}>Créer l'équipe</button>
+                <button className="main-button" onClick={handleNewTeam}>Créer l'équipe</button>
             </form>
             {errors && <div>{errors}</div>}
         </main>
