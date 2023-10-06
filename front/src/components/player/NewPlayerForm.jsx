@@ -4,6 +4,8 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
 
+import footballRepo from "../../repositories/football.repo";
+
 const NewPlayerForm = (props) => {
     const {footballData, setFootballData} = useContext(Context)
     const [player, setPlayer] = useState({name : null, age : 1, isStarterPlayer : true, playerPosition : "Attaquant", id : uuid()})
@@ -11,41 +13,47 @@ const NewPlayerForm = (props) => {
     const [errorMessage, setErrorMessage] = useState(null)
     const navigate = useNavigate()
 
-
     const createPlayer = (e) => {
         e.preventDefault()
 
-        if(!player?.age){
-            setErrorMessage("Le joueur est trop vieux")
-            return 
+        // if(!player?.age){
+        //     setErrorMessage("Le joueur est trop vieux")
+        //     return 
+        // }
+        // const teamToUpdate = footballData.find(team => team.name === teamName)
+        // if(!teamName){
+        //     setErrorMessage("Aucune équipe n'a été choisie")
+        //     return
+        // }
+        // const nonStarterPlayerCount = teamToUpdate.players.reduce((acc, value) => value.isStarterPlayer === false ? acc = acc +1 : acc, 0)
+
+        // if(nonStarterPlayerCount >= 2 && !player.isStarterPlayer){
+        //     setErrorMessage("Il y a déjà deux remplaçant")
+        //     return 
+        // }
+
+        // if(teamToUpdate.players.length >=7){
+        //     setErrorMessage("L'équipe est complète")
+        //     return 
+        // }
+
+        // teamToUpdate.players.push(player)
+
+        // const localTeamsData = JSON.parse(localStorage.getItem("footballTeams"))
+        // const newLocalData = localTeamsData.filter(team => team.name !== teamName)
+        // newLocalData.push(teamToUpdate)
+        // localStorage.setItem("footballTeams", JSON.stringify(newLocalData))
+
+        // const allUpdatedTeams = footballData.filter(team => team.name !== teamName)
+        // allUpdatedTeams.push(teamToUpdate)
+
+        const result = footballRepo.createPlayer(footballData, player, teamName)
+        if(result.isError){
+            setErrorMessage(result.message)
+        } else {
+            //Creer le reducer qui va bien
         }
-        const teamToUpdate = footballData.find(team => team.name === teamName)
-        if(!teamName){
-            setErrorMessage("Aucune équipe n'a été choisie")
-            return
-        }
-        const nonStarterPlayerCount = teamToUpdate.players.reduce((acc, value) => value.isStarterPlayer === false ? acc = acc +1 : acc, 0)
-
-        if(nonStarterPlayerCount >= 2 && !player.isStarterPlayer){
-            setErrorMessage("Il y a déjà deux remplaçant")
-            return 
-        }
-
-        if(teamToUpdate.players.length >=7){
-            setErrorMessage("L'équipe est complète")
-            return 
-        }
-
-        teamToUpdate.players.push(player)
-
-        const localTeamsData = JSON.parse(localStorage.getItem("footballTeams"))
-        const newLocalData = localTeamsData.filter(team => team.name !== teamName)
-        newLocalData.push(teamToUpdate)
-        localStorage.setItem("footballTeams", JSON.stringify(newLocalData))
-
-        const allUpdatedTeams = footballData.filter(team => team.name !== teamName)
-        allUpdatedTeams.push(teamToUpdate)
-        setFootballData(allUpdatedTeams)
+        // setFootballData(allUpdatedTeams)
         navigate("/team-list")
     }
 

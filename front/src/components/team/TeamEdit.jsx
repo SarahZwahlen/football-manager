@@ -1,20 +1,31 @@
 import { Context } from "../../context/football_app_context"
 import { useContext, useState } from "react"
+import footballRepo from "../../repositories/football.repo"
+import { useDispatch } from "react-redux"
+import { EDIT_TEAM } from "../../store/reducers/football_data_reducer"
 
-export function TeamEdit ({children, index}) {
+export function TeamEdit ({index, data, children}) {
     const {footballData, setFootballData } = useContext(Context)
     const [teamData, setTeamData] = useState(footballData[index])
+    const [errors, setErrors] = useState(null)
+    const dispatch = useDispatch()
     
     const handleEdit = (e) => {
         e.preventDefault()
+        const result = footballRepo.editTeam(footballData, data )
+        if (result.isError) {
+            setErrors(result.message)
+        } else {
+            dispatch(EDIT_TEAM(result.data))
+        }
 
-        const localTeamData = JSON.parse(localStorage.getItem("footballTeams"))
-        const localUpdatedTeamData = localTeamData.filter(team => team.name !== footballData[index].name)
-        localStorage.setItem("footballTeams", JSON.stringify([...localUpdatedTeamData, teamData]))
+        // const localTeamData = JSON.parse(localStorage.getItem("footballTeams"))
+        // const localUpdatedTeamData = localTeamData.filter(team => team.name !== footballData[index].name)
+        // localStorage.setItem("footballTeams", JSON.stringify([...localUpdatedTeamData, teamData]))
 
-        const editedData  = [...footballData]
-        editedData.splice(index ,1, teamData)
-        setFootballData(editedData)
+        // const editedData  = [...footballData]
+        // editedData.splice(index ,1, teamData)
+        // setFootballData(editedData)
 
 
     }

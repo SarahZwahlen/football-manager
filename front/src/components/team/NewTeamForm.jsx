@@ -1,20 +1,17 @@
-import { useState, useContext } from "react"
-import { Context } from "../../context/football_app_context"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-
 import { useSelector, useDispatch } from "react-redux"
-import { ADD_TEAM, DELETE_TEAM } from "../../store/reducers/football_data_reducer"
-
+import { ADD_TEAM} from "../../store/reducers/football_data_reducer"
+import footballRepo from "../../repositories/football.repo"
 
 const NewTeamForm = () => {
-    //const football = useSelector((state) => state.footballData)
+    const footballData = useSelector((state) => state.footballData)
     const dispatch = useDispatch()
-
-    const {footballData, setFootballData} = useContext(Context)
     const [newTeam, setNewTeam] = useState({
         name: '',
         jerseyColor: '#000000',
-        players: []
+        players: [],
+        id : null
     })
     const [errors, setErrors] = useState(null)
 
@@ -22,17 +19,12 @@ const NewTeamForm = () => {
 
     const handleNewTeam = (e) => {
         e.preventDefault()
-        const isAlreadyTeam = footballData.find(team => team.name.toLowerCase() === newTeam.name.toLocaleLowerCase())
-        if (isAlreadyTeam) {
-            setErrors("Le nom de l'équipe est déjà pris.")
+        const result = footballRepo.createTeam(footballData, newTeam)
+        if (result.isError) {
+            setErrors(result.message)
         }
         else {
-            const localStorageTeams = localStorage.getItem("footballTeams") ? JSON.parse(localStorage.getItem("footballTeams")) : []
-            localStorage.setItem("footballTeams", JSON.stringify([
-                ...localStorageTeams,
-                 newTeam
-             ]))
-            dispatch(ADD_TEAM(newTeam))
+            dispatch(ADD_TEAM(result.data))
             navigate("/team-list")
         }
     }

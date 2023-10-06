@@ -1,20 +1,21 @@
-import { Context } from "../../context/football_app_context"
 import { Team } from './Team.jsx'
 
-import { useContext, useEffect } from "react"
+import { useSelector } from "react-redux"
+
+import { useEffect } from "react"
 
 const TeamList = () => {
-    const { footballData, setFootballData } = useContext(Context)
+    const footballData = useSelector(state => state.footballData)
 
     useEffect(() => {
         const localTeamData = JSON.parse(localStorage.getItem("footballTeams"))
-        if (localTeamData) setFootballData(localTeamData)
+        // if (localTeamData) setFootballData(localTeamData)
     },[])
     
     return (
         <main>
             {footballData.length >0 && <h2>Liste des équipes</h2>}
-            {footballData.map((team, index) => <Team teamData={team} index={index} key={index}/>) }   
+            {footballData.map((team, index) => <Team teamData={team} key={index}/>) }   
         </main>
     )
 }
