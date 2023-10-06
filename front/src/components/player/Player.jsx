@@ -34,8 +34,7 @@ export function Player({playerData, teamIndex, playerIndex}) {
                 </button>
             </div>
             {isEditingPlayer && 
-                <PlayerEdit teamIndex={teamIndex} playerIndex={playerIndex}>
-                </PlayerEdit>
+                <PlayerEdit teamIndex={teamIndex} playerIndex={playerIndex}></PlayerEdit>
             }
         </div>
     )

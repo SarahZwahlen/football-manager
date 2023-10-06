@@ -22,29 +22,19 @@ const footballRepo = {
                 }
             }
         }, 
-        deleteTeam: ( data) => {
+        deleteTeam: (data) => {
           const localTeamData = JSON.parse(localStorage.getItem("footballTeams"))
           const newLocalTeamData = localTeamData.filter(team => team.name !== data.name)
           localStorage.setItem("footballTeams", JSON.stringify(newLocalTeamData))
         },
-        editTeam : (state, data) => {
-          const isAlreadyTeam = state.find(team => team.name.toLowerCase() === data.name.toLowerCase())
-          if (isAlreadyTeam) {
-            return {
-              isError : true,
-              message: "Le nom de l'équipe est déjà pris."
-            }
-          } else {
-            const current_team = state.filter(team => team.id !== data.id)
-            const newState = [...current_team, data]
-            
-            const localTeamData = JSON.parse(localStorage.getItem('footballTeams'))
-            const localUpdatedTeamData = localTeamData.filter(team => team.id !== data.id)
-            localStorage.setItem('footballTeams', JSON.stringify([...localUpdatedTeamData, data]))
-            return {
-              isError: false,
-              data: newState
-            }
+        editTeam : (state, newTeamData) => {
+          const current_team_index = state.indexOf(state.find(team => team.id === newTeamData.id))
+          const new_state = [...state]
+          new_state.splice(current_team_index , 1, newTeamData)
+          localStorage.setItem('footballTeams', JSON.stringify(new_state))
+          return {
+            isError: false,
+            data: new_state
           }
         },
         createPlayer : (footballState, newPlayerData, teamName) => {

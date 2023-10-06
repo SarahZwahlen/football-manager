@@ -1,33 +1,22 @@
-import { useContext, useState, useEffect } from 'react'
-import { Context } from '../../context/football_app_context'
 import { useParams } from 'react-router-dom'
 import { Player } from '../player/Player'
 
+import { useSelector } from 'react-redux'
+
 const TeamNotice = () => {
-    const [teamData, setTeamData] = useState({players : []})
-    const [index, setIndex] = useState(null)
-    const { footballData } = useContext(Context)
+    const footballData = useSelector(state => state.footballData)
     const params = useParams()
-    
-    useEffect(() => {
-        const teamName = params.team_name
-        const team = footballData.find(team => team.name === teamName)
-        setIndex(footballData.indexOf(team))
-        setTeamData(team)
-    }, [])
-    
-
-
+    const team_index = footballData.indexOf(footballData.find(team => team.id === params.id))
     return (
         <main>
             <div className="team-header">
-                <div className="team-jerseyColor" style={{backgroundColor : teamData.jerseyColor}}></div>
-                <h2>{teamData?.name}</h2>
+                <div className="team-jerseyColor" style={{backgroundColor : footballData[team_index]?.jerseyColor}}></div>
+                <h2>{footballData[team_index]?.name}</h2>
             </div>
             <div>
                 <h3>Liste des joueurs : </h3>
                 <ul>
-                    {teamData?.players.map((player, playerindex) => <Player playerData={player} teamIndex={index} playerIndex={playerindex}/>)}
+                    {footballData[team_index]?.players.map((player, playerindex) => <Player playerData={player} teamIndex={params.id} playerIndex={playerindex}/>)}
                 </ul>
             </div>
         </main>

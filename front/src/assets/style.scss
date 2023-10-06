@@ -253,12 +253,14 @@ button{
     label{
         width: 100%;
     }
+
     input, select {
         width: 100%;
         padding: 0.5rem;
         background-color: rgb(228, 228, 228);
         border-radius: 3px;
-        border : transparent
+        border: transparent;
+        color: black;
     }
 }
 
@@ -274,6 +276,10 @@ button{
     flex-direction: row;
     gap: 0.5rem;
     align-items: center;
+    a{
+        color : white;
+        text-decoration: none;
+    }
     
     &:hover {
         .icon-button{

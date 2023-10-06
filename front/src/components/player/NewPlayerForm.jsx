@@ -1,21 +1,25 @@
 import { Context } from "../../context/football_app_context";
 
-import { useContext, useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from 'uuid';
 
 import footballRepo from "../../repositories/football.repo";
 
 const NewPlayerForm = (props) => {
-    const {footballData, setFootballData} = useContext(Context)
+    const footballData = useSelector(state => state.footballData)
     const [player, setPlayer] = useState({name : null, age : 1, isStarterPlayer : true, playerPosition : "Attaquant", id : uuid()})
     const [teamName, setTeamName] = useState(null)
     const [errorMessage, setErrorMessage] = useState(null)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
 
     const createPlayer = (e) => {
         e.preventDefault()
 
+        
         // if(!player?.age){
         //     setErrorMessage("Le joueur est trop vieux")
         //     return 
@@ -52,8 +56,8 @@ const NewPlayerForm = (props) => {
             setErrorMessage(result.message)
         } else {
             //Creer le reducer qui va bien
+            
         }
-        // setFootballData(allUpdatedTeams)
         navigate("/team-list")
     }
 
