@@ -1,7 +1,7 @@
 import { Context } from "../../context/football_app_context"
 import { useContext, useState } from "react"
 
-export function PlayerEdit ({children, teamIndex , playerIndex}) {
+export function PlayerEdit ({teamIndex , playerIndex}) {
     const {footballData, setFootballData } = useContext(Context)
     const [newPlayerData, setNewPlayerData] = useState(footballData[teamIndex].players[playerIndex])
     const [errorMessage, setErrorMessage] = useState(null)
@@ -31,7 +31,6 @@ export function PlayerEdit ({children, teamIndex , playerIndex}) {
     }
     return (
         <div>
-            {children}
              <form className="small-form">
                 <legend>Modifier le joueur</legend>
                 <div>

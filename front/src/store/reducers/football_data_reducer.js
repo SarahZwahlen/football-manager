@@ -16,13 +16,16 @@ export const footballDataSlice = createSlice({
       return action.payload
     },
     CREATE_PLAYER : (state, action) => {
+      return action.payload
     },
-    DELETE_PLAYER : () => {},
+    DELETE_PLAYER : (state, action) => {
+      return action.payload
+    },
     EDIT_PLAYER : () => {}
     },
     
   } 
 )
 
-export const { ADD_TEAM, DELETE_TEAM, EDIT_TEAM} = footballDataSlice.actions
+export const { ADD_TEAM, DELETE_TEAM, EDIT_TEAM, CREATE_PLAYER, DELETE_PLAYER, EDIT_PLAYER} = footballDataSlice.actions
 export default footballDataSlice.reducer

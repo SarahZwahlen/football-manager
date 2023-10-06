@@ -3,8 +3,20 @@ import { useState, useContext } from 'react'
 import { Context } from '../../context/football_app_context'
 import { Link } from 'react-router-dom'
 
+import { useSelector, useDispatch } from 'react-redux'
+import footballRepo from '../../repositories/football.repo'
+import { DELETE_PLAYER } from '../../store/reducers/football_data_reducer'
+
 
 export function Player({playerData, teamIndex, playerIndex}) {
+    const football = useSelector(state => state.footballData)
+    const dispatch = useDispatch()
+    const handleDelete = (e) => {
+        e.preventDefault()
+        const result = footballRepo.deletePlayer()
+        dispatch(DELETE_PLAYER())
+    }
+
     const {footballData, setFootballData} = useContext(Context)
     const [isEditingPlayer, setEditingPlayer] = useState(false)
 

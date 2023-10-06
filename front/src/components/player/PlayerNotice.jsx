@@ -1,23 +1,17 @@
-import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { Context } from "../../context/football_app_context"
+import { useSelector } from "react-redux"
 
 const PlayerNotice = () => {
-    const [playerData, setPlayerData] = useState({})
-    const {footballData} = useContext(Context)
-
+    const football = useSelector(state => state.footballData)
     const params = useParams()
-    useEffect(() => {
-        const playerId = params.player_id
-        const player = footballData.map(team => team.players.find(player => player.id === playerId))[0]
-        if(player) setPlayerData(player)
-},[])
+    const current_team = football.map(team => team.players.find(player => player.id === params.player_id))
+    const current_player = current_team.players.find(player => player.id === params.player_id)
 
     return <main>
-        <h2>{playerData.name}</h2>
-        <p>Age : {playerData.age} ans</p>
-        <p>Poste : {playerData.playerPosition}</p>
-        <p>{playerData.isStarterPlayer ? "titulaire" : "remplaçant"}</p>
+        <h2>{current_player.name}</h2>
+        <p>Age : {current_player.age} ans</p>
+        <p>Poste : {current_player.playerPosition}</p>
+        <p>{current_player.isStarterPlayer ? "titulaire" : "remplaçant"}</p>
     </main>
 }
 
