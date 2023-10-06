@@ -1,33 +1,22 @@
-import { Context } from "../../context/football_app_context"
-import { useContext, useState } from "react"
+import { useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import footballRepo from "../../repositories/football.repo"
+import { EDIT_PLAYER } from "../../store/reducers/football_data_reducer"
 
 export function PlayerEdit ({teamIndex , playerIndex}) {
-    const {footballData, setFootballData } = useContext(Context)
+    const footballData = useSelector(state => state.footballData)
     const [newPlayerData, setNewPlayerData] = useState(footballData[teamIndex].players[playerIndex])
     const [errorMessage, setErrorMessage] = useState(null)
 
+    const dispatch = useDispatch()
     const handleEdit = (e) => {
-
-        
         e.preventDefault()
-
-    const nonStarterPlayerCount = footballData[teamIndex].players.reduce((acc, value) => value.isStarterPlayer === false ? acc = acc +1 : acc, 0)       
-     if(!newPlayerData?.age){
-        setErrorMessage('Le joueur est trop vieux')
-    } else if(nonStarterPlayerCount >=2){
-        setErrorMessage("Il y a déjà deux remplaçants")
-    } else {
-        const teamPlayers = footballData[teamIndex].players
-        teamPlayers.splice(playerIndex, 1, newPlayerData)
-        const updatedTeam = {
-            ...footballData[teamIndex],
-            players: teamPlayers
+        const result = footballRepo.editPlayer(footballData, newPlayerData, teamIndex)
+        if (result.isError) {
+            setErrorMessage(result.message)
+        } else {
+            dispatch(EDIT_PLAYER(result.data))
         }
-        const updatedData = footballData.splice(teamIndex, 1, updatedTeam)
-
-        localStorage.setItem("footballTeams", JSON.stringify(updatedData))
-        setFootballData(updatedData)
-    }
     }
     return (
         <div>

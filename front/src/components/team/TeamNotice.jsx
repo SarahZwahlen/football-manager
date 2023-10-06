@@ -16,7 +16,7 @@ const TeamNotice = () => {
             <div>
                 <h3>Liste des joueurs : </h3>
                 <ul>
-                    {footballData[team_index]?.players.map((player, playerindex) => <Player playerData={player} teamIndex={params.id} playerIndex={playerindex}/>)}
+                    {footballData[team_index]?.players.map((player, playerindex) => <Player key={playerindex} playerData={player} team_index={team_index} playerIndex={playerindex}/>)}
                 </ul>
             </div>
         </main>

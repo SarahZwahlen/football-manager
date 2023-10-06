@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { v4 as uuid } from "uuid"
-
 
 export const footballDataSlice = createSlice({
   name: 'footballData',
@@ -21,9 +19,10 @@ export const footballDataSlice = createSlice({
     DELETE_PLAYER : (state, action) => {
       return action.payload
     },
-    EDIT_PLAYER : () => {}
+    EDIT_PLAYER : (state, action) => {
+      return action.payload
+    }
     },
-    
   } 
 )
 

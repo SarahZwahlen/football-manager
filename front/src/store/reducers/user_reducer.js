@@ -1,57 +1,13 @@
-const initialState = {
-  teams: [],
-  user: []
-}
+import {createSlice} from "@reduxjs/toolkit"
 
-const footBallReducer = (state = initialState, action ) => {
-  switch (action.type) {
-    case "ADD_TEAM": {
-      const isAlreadyTeam = state.teams.find(team => team.name.toLowerCase() === action.payload.name.toLowerCase())
-      if (isAlreadyTeam) {
-        return "L'équipe est déjà présente"
-      } else {
-        return {
-          ...state,
-          teams: [
-            ...state.teams,
-            ...action.payload
-          ]
-        }
-      }
-
-    }
-    case "DELETE_TEAM": {
-      return {
-        ...state,
-        teams: [
-          ...state.teams.filter((team, team_index) => team_index !== action.payload.index)
-        ]
-      }
-    }
-    case "UPDATE_TEAM": {
-      const isAlreadyTeam = state.teams.find(team => team.name.toLowerCase() === action.payload.name)
-      if (isAlreadyTeam) {
-        return "Le nom de l'équipe éxiste déjà"
-      } else {
-         return {
-          ...state,
-          teams: [
-            ...state.teams.filter((team, team_index) => team_index !== action.payload.name)
-          ]
-         }
-      }
-    }
-    case "ADD_PLAYER": {
-
-    }
-    case "DELETE_PLAYER": {
-
-    }
-    case "UPDATE_PLAYER": {
-
-    }
-    default: return state
+const usersSlice = createSlice({
+  name : "users",
+  initialState : {
+    users : [{ name: "admin", email: "test@mail.com", password: "123" }], 
+    currentUser : {
+      isLogged : false
+}},
+  reducers : {
+    ADD_USER : (state, action) => {},
   }
-}
-
-export default footBallReducer
+}) 
