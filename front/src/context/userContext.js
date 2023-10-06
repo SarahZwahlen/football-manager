@@ -65,6 +65,7 @@ const UserContextComponent = ({ children }) => {
   };
 
   const logout = () => {
+
     localStorage.setItem("currentUser", { isLogged: false });
     setCurrentUser(userInitialState);
   };
@@ -74,6 +75,7 @@ const UserContextComponent = ({ children }) => {
     createUser,
     logUser,
     logout,
+    setCurrentUser
   };
 
   return (

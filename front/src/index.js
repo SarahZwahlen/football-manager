@@ -8,12 +8,10 @@ import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <UserContextComponent>
-        <Provider store={store}>
-            <App />
-        </Provider>
-        
-    </UserContextComponent>
-    
+  <UserContextComponent>
+    <Provider store={store}>
+      <App />
+     </Provider>
+  </UserContextComponent>   
 );
 
