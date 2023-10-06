@@ -1,4 +1,4 @@
-import { FootballDataProvider } from "./context/football_app_context.js";
+
 import { UserContext } from "./context/userContext.js";
 
 import { RouterProvider } from "react-router-dom";
@@ -18,13 +18,9 @@ function App() {
 
   return (
     <div className="app_container">
-      <FootballDataProvider>
-        <RouterProvider
-          router={currentUser.isLogged ? privateRoutes : publicRoutes}
-        >
+        <RouterProvider router={currentUser.isLogged ? privateRoutes : publicRoutes}>
           <Layout />
         </RouterProvider>
-      </FootballDataProvider>
     </div>
   );
 }

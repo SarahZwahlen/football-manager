@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 const PlayerNotice = () => {
     const football = useSelector(state => state.footballData)
     const params = useParams()
-    const current_team = football.map(team => team.players.find(player => player.id === params.player_id))
+    const current_team = football.find(team => team.players.find(player => player.id === params.player_id))
     const current_player = current_team.players.find(player => player.id === params.player_id)
 
     return <main>
