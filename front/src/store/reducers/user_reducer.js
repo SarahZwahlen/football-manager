@@ -7,10 +7,11 @@ const usersSlice = createSlice({
       { 
         name: "admin", 
         email: "test@mail.com",
-        password: "123" 
+        password: "123",
+        id: '666'
       }
     ], 
-    currentUser : {}
+    current_user : {}
   },
   reducers : {
     ADD_USER : (state, action) => {

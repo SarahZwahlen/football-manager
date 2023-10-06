@@ -1,5 +1,6 @@
-import { useState, useContext } from "react";
-import { UserContext } from "../../context/userContext";
+import { useState } from "react";
+
+import { useSelector } from "react-redux";
 
 import NewPlayerForm from "../player/NewPlayerForm";
 import NewTeamForm from "../team/NewTeamForm";
@@ -14,7 +15,9 @@ const Main = () => {
   const [isCreatePlayerFormVisible, setIsCreatePlayerFormVisible] = useState(false)
   const [isLigueVisible, setIsLigueVisible] = useState(false)
 
-  const { currentUser } = useContext(UserContext);
+  const user = useSelector(state => state.users)
+  const is_logged = user.currentUser
+
   const showTeams = () => {
     setIsTeamsVisible(true)
     setIsCreateTeamFormVisible(false)
@@ -44,12 +47,13 @@ const Main = () => {
 
   return (
     <main>
-      {(isTeamsVisible && currentUser.isLogged) && <TeamList/>}
-      {(isCreateTeamFormVisible && currentUser.isLogged) && <NewTeamForm showTeams={showTeams}/>}
-      {(isCreatePlayerFormVisible && currentUser.isLogged) && <NewPlayerForm showTeams={showTeams}/>}
+      <div>Hello</div>
+      {(isTeamsVisible && is_logged) && <TeamList/>}
+      {(isCreateTeamFormVisible && is_logged) && <NewTeamForm showTeams={showTeams}/>}
+      {(isCreatePlayerFormVisible && is_logged) && <NewPlayerForm showTeams={showTeams}/>}
       {isLigueVisible && <Ligue1Result/>}
-      {!currentUser.isLogged && <Login/>}
-      {!currentUser.isLogged && <CreateUser />}
+      {!is_logged && <Login/>}
+      {!is_logged && <CreateUser />}
     </main>
   )
 }

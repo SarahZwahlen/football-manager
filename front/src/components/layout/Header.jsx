@@ -1,14 +1,18 @@
 import { Link, useNavigate  } from 'react-router-dom'
 
-import { useContext } from 'react'
-
-import { UserContext } from '../../context/userContext.js'
+import { useSelector, useDispatch } from 'react-redux'
+import userRepo from '../../repositories/user.repo.js'
+import { LOG_OUT } from '../../store/reducers/user_reducer.js'
 
 const Header = () => {
-  const {logout, currentUser} = useContext(UserContext)
+  const user = useSelector(state => state.users)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+  
+  const is_logged = user.currentUser
   const handleLogOut = () => {
-    logout()
+    const result = userRepo.logOut(user)
+    dispatch(LOG_OUT(result))
     navigate('/')
   }
   return (
@@ -18,9 +22,9 @@ const Header = () => {
       </div>
       <Link to="/"><h1><i className="fa-regular fa-futbol"></i> Football Manager</h1></Link>
       <div className='header-buttons end'>
-        {!currentUser.isLogged &&<Link to="/login">Login</Link>}
-        {!currentUser.isLogged &&<Link  to="/new-user">Créer un compte</Link>}
-        {currentUser.isLogged && <p onClick={handleLogOut}>Log out</p>}
+        {!is_logged &&<Link to="/login">Login</Link>}
+        {!is_logged &&<Link  to="/new-user">Créer un compte</Link>}
+        {is_logged && <p onClick={handleLogOut}>Log out</p>}
       </div>
     </header>
   )

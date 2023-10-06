@@ -1,36 +1,23 @@
-
-import { UserContext } from "./context/userContext.js";
+import { useSelector } from "react-redux";
 
 import { RouterProvider } from "react-router-dom";
 import privateRoutes from "./router/privateRoutes.js";
 import publicRoutes from "./router/publicRoutes.js";
 
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 
 import Layout from "./components/layout/Layout.jsx";
 
 import "./assets/style.scss";
 
 function App() {
-  const [userIsLogged, setUserIsLogged] = useState(false)
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-
-  useEffect(() => {
-    const currentLocalUser = JSON.parse(localStorage.getItem("currentUser"))
-    console.log("local user", currentLocalUser)
-    console.log("is Logged", userIsLogged)
-
-    if(currentLocalUser) {
-      setCurrentUser(currentLocalUser)
-      setUserIsLogged(true)
-    } else {
-      setUserIsLogged(false)
-    }
-  }, [])
+  const user = useSelector(state => state.users)
+  const [userIsLogged, setUserIsLogged] = useState(user.current_user ? true : false)
+  //userIsLogged ? privateRoutes : publicRoutes
 
   return (
     <div className="app_container">
-      <RouterProvider router={userIsLogged ? privateRoutes : publicRoutes}>
+      <RouterProvider router={privateRoutes}>
         <Layout />
       </RouterProvider>
     </div>
