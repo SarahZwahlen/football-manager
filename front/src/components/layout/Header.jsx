@@ -1,7 +1,9 @@
 import { Link, useNavigate  } from 'react-router-dom'
 
 import { useSelector, useDispatch } from 'react-redux'
-import userRepo from '../../repositories/user.repo.js'
+
+import { logOut } from '../../utils/user.js'
+
 import { LOG_OUT } from '../../store/reducers/user_reducer.js'
 
 const Header = () => {
@@ -9,9 +11,9 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   
-  const is_logged = user.currentUser
+  const is_logged = user.current_user.hasOwnProperty('email')
   const handleLogOut = () => {
-    const result = userRepo.logOut(user)
+    const result = logOut(user)
     dispatch(LOG_OUT(result))
     navigate('/')
   }

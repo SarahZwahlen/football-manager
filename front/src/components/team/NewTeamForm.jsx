@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 import { useSelector, useDispatch } from "react-redux"
 import { ADD_TEAM } from "../../store/reducers/football_data_reducer"
-import footballRepo from "../../repositories/football.repo"
+import footballRepo from "../../store/helper/footbal_helper"
 
 const NewTeamForm = () => {
   const footballData = useSelector((state) => state.footballData)

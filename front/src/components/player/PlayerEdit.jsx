@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 import { useSelector, useDispatch } from "react-redux"
-import footballRepo from "../../repositories/football.repo"
+import footballRepo from "../../store/helper/footbal_helper"
 import { EDIT_PLAYER } from "../../store/reducers/football_data_reducer"
 
 export function PlayerEdit ({teamIndex , playerIndex}) {

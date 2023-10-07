@@ -4,7 +4,7 @@ import { useState } from "react"
 
 import { useSelector, useDispatch } from "react-redux"
 import { DELETE_TEAM } from "../../store/reducers/football_data_reducer"
-import footballRepo from "../../repositories/football.repo"
+import footballRepo from "../../store/helper/footbal_helper"
 
 import { TeamEdit } from "./TeamEdit"
 

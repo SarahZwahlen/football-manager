@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import footballRepo from "../../repositories/football.repo"
+import footballRepo from "../../store/helper/footbal_helper"
 import { useDispatch, useSelector } from "react-redux"
 import { EDIT_TEAM } from "../../store/reducers/football_data_reducer"
 

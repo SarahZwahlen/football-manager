@@ -6,9 +6,8 @@ import { useLocation } from "react-router-dom";
 
 const NavBar = () => {
   const users = useSelector(state => state.users)
-  const is_logged = users.currentUser
+  const is_logged = users.current_user.hasOwnProperty('email')
   const location = useLocation();
-
   return (
     <>
       { (location.pathname !=='/login' && location.pathname !=='/new-user') && 

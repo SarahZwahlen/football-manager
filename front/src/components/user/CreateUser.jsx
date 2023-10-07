@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom"
 
 import { useSelector, useDispatch } from "react-redux"
 import { ADD_USER, LOG_IN } from "../../store/reducers/user_reducer"
-import userRepo from "../../repositories/user.repo"
+
+import { createUser, logUser } from "../../utils/user"
 
 const CreateUser = () => {
   const users = useSelector(state => state.users)
@@ -17,12 +18,12 @@ const CreateUser = () => {
   
   const handleNewUser = (e) => {
     e.preventDefault()
-    const result = userRepo.createUser(users, userData)
+    const result = createUser(users, userData)
     if (result.has_error) {
       setErrorMessage(result.message)
     } else {
       dispatch(ADD_USER(result.data))
-      const log_in = userRepo.logUser(result.data, userData)
+      const log_in = logUser(result.data, userData)
       dispatch(LOG_IN(log_in))
       navigate("/")
     }

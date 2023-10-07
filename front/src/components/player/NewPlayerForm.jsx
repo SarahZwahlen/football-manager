@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux"
 import { CREATE_PLAYER } from "../../store/reducers/football_data_reducer";
-import footballRepo from "../../repositories/football.repo";
+import footballRepo from "../../store/helper/footbal_helper";
 
 import { useNavigate } from "react-router-dom";
 

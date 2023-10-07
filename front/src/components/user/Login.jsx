@@ -3,7 +3,9 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { useSelector, useDispatch } from 'react-redux'
-import userRepo from '../../repositories/user.repo'
+
+import { logUser } from '../../utils/user'
+
 import { LOG_IN } from '../../store/reducers/user_reducer'
 
 export function Login () {
@@ -17,7 +19,7 @@ export function Login () {
 
   const handleLogIn = (e) => {
     e.preventDefault()
-    const result = userRepo.logUser(users, user)
+    const result = logUser(users, user)
     if (result.has_error) {
       setErrorMessage(result.message)
     } else {

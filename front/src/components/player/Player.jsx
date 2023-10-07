@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { useSelector, useDispatch } from 'react-redux'
-import footballRepo from '../../repositories/football.repo'
+import footballRepo from '../../store/helper/footbal_helper'
 import { DELETE_PLAYER } from '../../store/reducers/football_data_reducer'
 
  import { PlayerEdit } from './PlayerEdit'
