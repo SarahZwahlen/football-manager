@@ -1,8 +1,9 @@
 import { useState } from "react"
 
-import footballRepo from "../../store/helper/footbal_helper"
 import { useDispatch, useSelector } from "react-redux"
 import { EDIT_TEAM } from "../../store/reducers/football_data_reducer"
+
+import { editTeam } from "../../utils/football"
 
 export function TeamEdit({ data, hideForm }) {
   const footballData = useSelector(state => state.footballData)
@@ -13,8 +14,8 @@ export function TeamEdit({ data, hideForm }) {
   
   const handleEdit = (e) => {
     e.preventDefault()
-    const result = footballRepo.editTeam(footballData, teamData )
-    if (result.isError) {
+    const result = editTeam(footballData, teamData )
+    if (result.has_error) {
       setErrors(result.message)
     } else {
       dispatch(EDIT_TEAM(result.data))

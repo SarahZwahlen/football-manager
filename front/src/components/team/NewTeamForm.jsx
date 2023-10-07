@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom"
 
 import { useSelector, useDispatch } from "react-redux"
 import { ADD_TEAM } from "../../store/reducers/football_data_reducer"
-import footballRepo from "../../store/helper/footbal_helper"
+
+import { createTeam } from "../../utils/football"
 
 const NewTeamForm = () => {
   const footballData = useSelector((state) => state.footballData)
@@ -22,8 +23,8 @@ const NewTeamForm = () => {
   
   const handleNewTeam = (e) => {
     e.preventDefault()
-    const result = footballRepo.createTeam(footballData, newTeam)
-    if (result.isError) {
+    const result = createTeam(footballData, newTeam)
+    if (result.has_error) {
       setErrors(result.message)
     }
     else {

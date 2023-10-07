@@ -4,7 +4,8 @@ import { useState } from "react"
 
 import { useSelector, useDispatch } from "react-redux"
 import { DELETE_TEAM } from "../../store/reducers/football_data_reducer"
-import footballRepo from "../../store/helper/footbal_helper"
+
+import { deleteTeam } from "../../utils/football"
 
 import { TeamEdit } from "./TeamEdit"
 
@@ -15,9 +16,9 @@ export function Team({teamData}) {
 
   const [isEditing, setIsEditing] = useState(false)
 
-  const deleteTeam = (e) => {
+  const handleDelete = (e) => {
     e.preventDefault()
-    footballRepo.deleteTeam(teamData)
+    deleteTeam(teamData)
     dispatch(DELETE_TEAM(teamData.id))
   }
 
@@ -30,7 +31,7 @@ export function Team({teamData}) {
       <div className="team-header">
         <div className="team-jerseyColor" style={{backgroundColor : teamData.jerseyColor}}></div>
         <Link to={`/team-notice/${teamData.id}`}><h3>{teamData?.name}</h3></Link>
-        <button className="icon-button" onClick={deleteTeam}>
+        <button className="icon-button" onClick={handleDelete}>
           <i className="fa-solid fa-trash"></i>
         </button>
         <button className="icon-button" onClick={() => setIsEditing(!isEditing)}>

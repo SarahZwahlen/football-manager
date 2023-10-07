@@ -2,27 +2,25 @@ import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux"
 import { CREATE_PLAYER } from "../../store/reducers/football_data_reducer";
-import footballRepo from "../../store/helper/footbal_helper";
+
+import { createPlayer } from "../../utils/player";
 
 import { useNavigate } from "react-router-dom";
-
-import { v4 as uuid } from 'uuid';
-
 
 const NewPlayerForm = (props) => {
   const footballData = useSelector(state => state.footballData)
   
-  const [player, setPlayer] = useState({name : "", age : 1, isStarterPlayer : true, playerPosition : "Attaquant", id : uuid()})
+  const [player, setPlayer] = useState({name : "", age : 1, isStarterPlayer : true, playerPosition : "Attaquant"})
   const [teamId, setTeamID] = useState("")
   const [errorMessage, setErrorMessage] = useState(null)
   
   const navigate = useNavigate()
   const dispatch = useDispatch()
   
-  const createPlayer = (e) => {
+  const handleCreate = (e) => {
     e.preventDefault()
-    const result = footballRepo.createPlayer(footballData, player, teamId)
-    if (result.isError) {
+    const result = createPlayer(footballData, player, teamId)
+    if (result.has_error) {
       setErrorMessage(result.message)
     } else {
       dispatch(CREATE_PLAYER(result.data))
@@ -55,7 +53,7 @@ const NewPlayerForm = (props) => {
           <option value="true" default>Oui</option>
           <option value="false">Non</option>
         </select>
-        <button  className="main-button" onClick={createPlayer}>Créer le joueur</button>
+        <button  className="main-button" onClick={handleCreate}>Créer le joueur</button>
         {errorMessage && <p className="error">{errorMessage}</p>}
       </form>
     </main>
